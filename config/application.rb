@@ -23,5 +23,11 @@ module ProgApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # setup warden
+    config.middleware.use Warden::Manager do |manager|
+      manager.default_strategies :magic_link
+      manager.failure_app = AuthFailureApp
+    end
   end
 end
